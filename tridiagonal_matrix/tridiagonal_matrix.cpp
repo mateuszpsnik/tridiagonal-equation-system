@@ -18,14 +18,28 @@ void input(vec_doub& vec, int end_index, int start_index = 0)
 	}
 }
 
+void initialize_array(double** arr, vec_doub const& A, vec_doub const& B, 
+	vec_doub const& C, int size)
+{	
+	for (int i = 0; i < size; i++)
+	{
+		arr[i][i] = B[i];
+		if (i > 0)
+			arr[i][i - 1] = A[i];
+		if (i < size - 1)
+			arr[i][i + 1] = C[i];
+	}
+}
 
-
-void print_eq(vec_doub const& A, vec_doub const& B, vec_doub const& C,
-	vec_doub const& F, int size)
+void print_eq(double** arr, vec_doub const& F, int size)
 {
 	for (int i = 0; i < size; i++)
 	{
-
+		for (int j = 0; j < size; j++)
+		{
+			cout << arr[i][j] << " ";
+		}
+		cout << "\t" << "u" << i << "\t" << F[i] << endl;
 	}
 }
 
@@ -45,21 +59,22 @@ int main()
 	input(B, size);
 
 	A.push_back(0.0);
-	cout << "Vector A (above diagonal):" << endl;
+	cout << "Vector A (below diagonal):" << endl;
 	input(A, size, 1);
 
-	cout << "Vector C (below diagonal):" << endl;
+	cout << "Vector C (above diagonal):" << endl;
 	input(C, size - 1);
 	C.push_back(0.0);
 
 	cout << "Vector F:" << endl;
 	input(F, size);
 
-	double** arr = new double* [size];
+	double** arr = new double* [size]{ 0 };
 	for (int i = 0; i < size; i++)
-		arr[i] = new double[size];
+		arr[i] = new double[size]{ 0 };
 
-
+	initialize_array(arr, A, B, C, size);
+	print_eq(arr, F, size);
 
 	for (int i = 0; i < size; i++)
 		delete[] arr[i];
