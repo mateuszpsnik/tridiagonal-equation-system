@@ -6,7 +6,7 @@ struct DivisionByZeroException: public std::exception
 {
 	char const* what() const throw()
 	{
-		return "The denominator was equal to zero.\nRemember that the value of B0 (0,0) cannot be equal to zero.";
+		return "The denominator was equal to zero.\nRemember that the value of B0 (0,0) cannot be equal to zero.\n";
 	}
 };
 
@@ -14,7 +14,7 @@ struct NonPositiveSizeException : public std::exception
 {
 	char const* what() const throw()
 	{
-		return "The size of the matrix must be positive.";
+		return "The size of the matrix must be positive.\n";
 	}
 };
 
